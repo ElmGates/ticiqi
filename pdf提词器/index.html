@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF提词器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PDF提词器</h1>
+            <p class="subtitle">上传PDF文件，自动生成镜像提词效果</p>
+        </header>
+
+        <div class="upload-section" id="uploadSection">
+            <div class="upload-area" id="uploadArea">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <p class="upload-text">点击或拖拽PDF文件到此处</p>
+                <input type="file" id="fileInput" accept=".pdf" hidden>
+            </div>
+        </div>
+
+        <div class="controls" id="controls" style="display: none;">
+            <div class="control-group">
+                <label for="speedSlider">滚动速度：</label>
+                <input type="range" id="speedSlider" min="0.5" max="5" value="2" step="0.5">
+                <span id="speedValue">2</span>
+            </div>
+            <div class="control-group">
+                <button id="fullscreenBtn" class="btn secondary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    </svg>
+                    全屏
+                </button>
+                <button id="playBtn" class="btn primary">开始</button>
+                <button id="pauseBtn" class="btn secondary" disabled>暂停</button>
+                <button id="resetBtn" class="btn secondary">重置</button>
+            </div>
+        </div>
+
+        <div class="display-area" id="displayArea" style="display: none;">
+            <div class="teleprompter-container">
+                <div class="scroll-indicator">上下滚动查看内容</div>
+                <div class="teleprompter-content" id="teleprompterContent">
+                    <!-- PDF页面将在这里显示 -->
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>正在处理PDF文件...</p>
+        </div>
+
+        <div class="floating-controls" id="floatingControls" style="display: none;">
+            <button id="floatPlayBtn" class="float-btn" title="开始/暂停">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polygon points="5,3 19,12 5,21"/>
+                </svg>
+            </button>
+            <button id="floatResetBtn" class="float-btn" title="重置">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polyline points="1,4 1,10 7,10"/>
+                    <path d="M3.51,15a9,9 0 1,0 2.13,-9.36L1,10"/>
+                </svg>
+            </button>
+            <button id="floatExitBtn" class="float-btn" title="退出全屏">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
+                </svg>
+            </button>
+            <div class="float-speed-control">
+                <input type="range" id="floatSpeedSlider" min="0.5" max="5" value="2" step="0.5">
+                <span id="floatSpeedValue">2</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

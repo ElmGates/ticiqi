@@ -1,0 +1,472 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    position: relative;
+}
+
+/* 控制面板样式 */
+        .control-panel {
+            width: 320px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .control-panel.hidden {
+            transform: translateX(-100%);
+        }
+        
+        .control-panel.hidden + .teleprompter-container {
+            margin-left: 0;
+        }
+        
+        .teleprompter-container {
+            transition: margin-left 0.3s ease;
+        }
+
+.panel-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 版权信息样式 */
+.copyright-section {
+    margin-top: 20px;
+    padding: 15px 0 5px 0;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border-top: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.copyright-section p {
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.panel-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 5px;
+}
+
+/* 文本输入区域 */
+#textInput {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+#textInput:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 控制组 */
+.control-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap; /* 防止换行 */
+}
+
+.control-group label {
+    font-weight: 500;
+    color: #555;
+    min-width: 60px;
+    font-size: 13px;
+    flex-shrink: 0; /* 防止标签收缩 */
+}
+
+.control-group input[type="range"] {
+    flex: 1;
+    min-width: 0; /* 允许滑块收缩 */
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb:hover {
+    background: #5a6fd8;
+}
+
+.control-group input[type="color"] {
+    width: 50px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.control-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+.control-group span {
+    font-weight: 600;
+    color: #667eea;
+    min-width: 35px;
+    max-width: 40px; /* 限制最大宽度 */
+    text-align: center;
+    font-size: 12px;
+    flex-shrink: 0; /* 防止数字显示收缩 */
+}
+
+/* 按钮样式 */
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+#formatText {
+    background: #28a745;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#formatText:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#startScroll {
+    background: #007bff;
+    color: white;
+}
+
+#startScroll:hover {
+    background: #0056b3;
+}
+
+#pauseScroll {
+    background: #ffc107;
+    color: #212529;
+}
+
+#pauseScroll:hover {
+    background: #e0a800;
+}
+
+#resetScroll {
+    background: #dc3545;
+    color: white;
+}
+
+#resetScroll:hover {
+    background: #c82333;
+}
+
+#toggleFullscreen {
+    background: #6f42c1;
+    color: white;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#toggleFullscreen:hover {
+    background: #5a32a3;
+}
+
+#togglePanel {
+    background: #17a2b8;
+    color: white;
+    width: 100%;
+}
+
+#togglePanel:hover {
+    background: #138496;
+}
+
+/* 进度条 */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    text-align: center;
+    font-weight: 600;
+    color: #667eea;
+    font-size: 14px;
+}
+
+/* 提词器显示区域 */
+.teleprompter-container {
+    flex: 1;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: margin-left 0.3s ease;
+    min-height: 0; /* 修复flex项目的高度问题 */
+}
+
+/* 悬浮恢复按钮 */
+.show-panel-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(23, 162, 184, 0.9);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.show-panel-btn:hover {
+    background: rgba(23, 162, 184, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.teleprompter-content {
+    width: 98%;
+    max-width: 1400px;
+    height: 85vh;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.3s ease, max-width 0.3s ease; /* 添加过渡效果 */
+}
+
+/* 控制面板隐藏时扩展文本内容区域 */
+.container.panel-hidden .teleprompter-content {
+    width: 100%; /* 占满整个可用宽度 */
+    max-width: none; /* 移除最大宽度限制 */
+    height: 100vh; /* 占满整个视口高度 */
+    margin: 0; /* 移除边距 */
+    padding: 0 40px; /* 添加一些内边距，让文本不会太靠边 */
+}
+
+.text-display {
+    padding: 50px 20px;
+    transition: transform 0.1s linear;
+    will-change: transform;
+    color: #ffffff; /* 确保文本颜色为白色 */
+    font-size: 32px; /* 默认字体大小 */
+    line-height: 1.8; /* 默认行高 */
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 控制面板隐藏时调整文本显示的内边距 */
+.container.panel-hidden .text-display {
+    padding: 50px 60px; /* 增加左右内边距，充分利用屏幕宽度 */
+}
+
+/* 全屏模式下的文本显示内边距 */
+.container.fullscreen .text-display {
+    padding: 50px 60px; /* 增加左右内边距，充分利用屏幕宽度 */
+}
+
+.text-display p {
+    margin-bottom: 0.5em; /* 减少段间距 */
+    line-height: 1.8; /* 应用到每一行 */
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+/* 阅读指导线 */
+        .reading-guide {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: none; /* 隐藏阅读指导线 */
+        }
+
+.reading-guide::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 20%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0.3) 80%,
+        transparent 100%
+    );
+}
+
+.reading-guide.visible {
+    opacity: 1;
+}
+
+/* 全屏模式 */
+.container.fullscreen .control-panel {
+    display: none;
+}
+
+.container.fullscreen .teleprompter-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container.fullscreen .teleprompter-content {
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    padding: 0 40px; /* 添加一些内边距，让文本不会太靠边 */
+}
+
+/* 控制面板隐藏时的全屏扩展 */
+.container.panel-hidden .teleprompter-container {
+    margin-left: 0;
+    width: 100vw; /* 使用视口宽度，占满整个屏幕 */
+    border-radius: 0;
+    position: absolute; /* 使用绝对定位占满空间 */
+    left: 0;
+    top: 0;
+    height: 100vh; /* 占满整个视口高度 */
+}
+
+.container.panel-hidden {
+    padding: 0;
+    border-radius: 0;
+    overflow: hidden; /* 防止出现滚动条 */
+}
+
+/* 当控制面板隐藏时，移除body的渐变背景 */
+body.panel-hidden-bg {
+    background: #000000; /* 纯黑色背景 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .control-panel {
+        width: 280px;
+        padding: 15px;
+    }
+    
+    .teleprompter-content {
+        width: 98%;
+        max-width: none;
+    }
+    
+    .text-display {
+        padding: 30px 15px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .teleprompter-content {
+        width: 95%;
+        max-width: 1600px;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.panel-section {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.panel-section:nth-child(1) { animation-delay: 0.1s; }
+.panel-section:nth-child(2) { animation-delay: 0.2s; }
+.panel-section:nth-child(3) { animation-delay: 0.3s; }
+.panel-section:nth-child(4) { animation-delay: 0.4s; }
+.panel-section:nth-child(5) { animation-delay: 0.5s; }
