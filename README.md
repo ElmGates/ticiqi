@@ -1,11 +1,12 @@
 # 网页版提词器 (Web Teleprompter) v1.5
 
 一个功能强大、简单易用的网页版提词器工具。专为演讲、视频录制、直播等场景设计，支持多设备远程协同控制。
+<a href="https://teleprompter.superjia.com.cn">在线演示</a>
 
 ## ✨ 主要功能
 
 ### 📝 文本提词器 (核心版本)
-位于 `new/` 目录，包含以下特性：
+包含以下特性：
 
 *   **智能文本处理**：
     *   支持文本粘贴与编辑。
@@ -31,7 +32,7 @@
     *   针对手机端优化的提示与交互体验。
 
 ### 📄 PDF 提词器
-位于 `new/pdf/` 目录：
+位于 `pdf` 目录：
 *   支持直接上传 PDF 文件。
 *   自动处理 PDF 内容进行提词播放。
 *   支持镜像翻转与速度控制。
@@ -40,11 +41,10 @@
 
 ### 方式 1：直接运行
 本项目为纯静态网页，无需安装任何依赖。
-1.  进入 `new` 文件夹。
-2.  双击 `index.html` 在浏览器中打开即可使用。
+1.  双击 `index.html` 在浏览器中打开即可使用。
 
 ### 方式 2：部署
-可以将 `new` 文件夹内的内容部署到任何静态网页托管服务（如 GitHub Pages, Vercel, Nginx 等）。
+可以将内容部署到任何静态网页托管服务（如 GitHub Pages, Vercel, Nginx 等）。
 
 ## 🎮 操作指南
 
@@ -69,16 +69,13 @@
 
 ```
 /
-├── new/                 # ✨ 最新稳定版本 (v1.5)
-│   ├── index.html       # 主程序入口
-│   ├── script.js        # 核心逻辑 (含 Teleprompter 类与 RemoteController 类)
-│   ├── styles.css       # 样式文件
-│   └── pdf/             # PDF 提词器模块
-│       └── index.html
-├── index.html           # (旧版本)
-├── script.js            # (旧版本)
-└── styles.css           # (旧版本)
+├── index.html       # 主程序入口
+├── script.js        # 核心逻辑 (含 Teleprompter 类与 RemoteController 类)
+├── styles.css       # 样式文件
+└── pdf/             # PDF 提词器模块
+    └── index.html
 ```
+
 
 ## 🛠️ 技术栈
 *   HTML5 / CSS3 / JavaScript (ES6+)
